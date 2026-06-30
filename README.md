@@ -58,6 +58,25 @@ The two core building blocks — the **RankMixer block** (parameter-free token m
 
 ---
 
+## Results
+
+On the official TAAC-2026 / KDD Cup 2026 Tencent UNI-REC test set, the model reaches a test
+weighted-AUC of **0.828814** (rank **#9**) — a **+14.716‰** total gain over the baseline
+(0.814098), with a *single* model.
+
+**Ablation** — incremental, single-variable contribution of each component. **Weighted pair
+pooling** (+7.469‰) and **SWA** (+3.272‰) are the two dominant levers:
+
+<p align="center"><img src="pic/Ablation.png" alt="Incremental ablation study" width="90%" /></p>
+
+**Scaling** — compute–accuracy trade-off (bubble area = dense parameter count). Naively widening
+the 16-token blob backbone saturates (768 → 1152 *degrades* despite more parameters); switching
+to **24 per-field tokens** lets the larger model pay off and reach the best accuracy:
+
+<p align="center"><img src="pic/scaling.png" alt="Compute–accuracy scaling" width="75%" /></p>
+
+---
+
 ## Installation
 
 ```bash
