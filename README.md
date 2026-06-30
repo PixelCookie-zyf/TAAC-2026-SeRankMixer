@@ -19,7 +19,7 @@ Channel-SENET), then fed in parallel to a deep **RankMixer** stream and a shallo
 **Wide&Deep** stream whose hidden vectors are combined by a **group-wise bilinear
 fusion**:
 
-![SeRankMixer architecture](pic/Main%20Model.png)
+<img src="pic/Main%20Model.png" alt="SeRankMixer architecture" width="50%" />
 
 The two core building blocks — the **RankMixer block** (parameter-free token mixing
 + a per-token pSwiGLU / Swish-gated FFN) and the **weighted pair pooling** (a
