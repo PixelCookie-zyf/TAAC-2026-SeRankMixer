@@ -1,0 +1,15 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+
+# Local training / evaluation artifacts
+ckpt/
+checkpoints/
+outputs/
+runs/
+wandb/
+logs/
+predictions.json
+
+# Data (provide your own parquet + schema.json)
+demo_data/
