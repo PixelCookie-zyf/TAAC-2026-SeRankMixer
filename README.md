@@ -1,5 +1,7 @@
 # SeRankMixer
 
+[![arXiv](https://img.shields.io/badge/arXiv-2607.15590-b31b1b.svg)](https://arxiv.org/abs/2607.15590)
+
 A single-model (non-ensemble) **post-click conversion-rate (pCVR)** ranking network
 for the **TAAC 2026 / Tencent UNI-REC** track. It combines a semantically-tokenized
 **RankMixer** backbone with target-attention behavior-sequence pooling, a Wide&Deep
@@ -8,6 +10,17 @@ recipe built around **Muon + constant-LR SWA + SAM**.
 
 > **Result:** official leaderboard test weighted-AUC **0.828814**, final rank **#9**,
 > with a *single* model (no ensembling).
+
+> **Paper:** [Field-Aware RankMixer with Dual-Stream Bilinear Fusion for the Tencent UNI-REC Challenge](https://arxiv.org/abs/2607.15590).
+
+---
+
+## News
+
+- **2026-07-17:** Our paper, *Field-Aware RankMixer with Dual-Stream Bilinear Fusion
+  for the Tencent UNI-REC Challenge*, is now available on arXiv. This repository
+  contains the implementation and training recipe for our #9 single-model solution
+  in the KDD Cup 2026 Tencent UNI-REC Challenge.
 
 ---
 
@@ -33,9 +46,11 @@ The two core building blocks — the **RankMixer block** (parameter-free token m
   *one token per field* (big semantic vectors stay independent, small statistic
   fids are merged) instead of being averaged into a couple of "blob" tokens, so
   RankMixer's token mixing can form genuine cross-field interactions.
-- **RankMixer backbone** ([arXiv:2507.15551](https://arxiv.org/abs/2507.15551)):
+- **Adapted RankMixer backbone** ([arXiv:2507.15551](https://arxiv.org/abs/2507.15551)):
   `L` blocks of *parameter-free* multi-head token mixing + a *per-token* pSwiGLU
-  feed-forward network, with RMSNorm. Heads are tied to tokens (`H = T`).
+  feed-forward network, with RMSNorm and heads tied to tokens (`H = T`). Unlike the
+  original, the blocks run over our per-field tokens (above) instead of a fixed
+  number of projected tokens.
 - **Behavior-sequence modeling (DIN).** Each behavior domain is pooled by
   target-attention (DIN). The long domain additionally uses a **dual-window DIN**
   (recent half / older half pooled separately, then concatenated).
@@ -145,6 +160,19 @@ SeRankMixer/
 - SWA — *Averaging Weights Leads to Wider Optima and Better Generalization*, [arXiv:1803.05407](https://arxiv.org/abs/1803.05407)
 - SAM — *Sharpness-Aware Minimization for Efficiently Improving Generalization*, [arXiv:2010.01412](https://arxiv.org/abs/2010.01412)
 - Muon — *Muon: An optimizer for the hidden layers of neural networks*
+
+## Citation
+
+If you find this repository useful, please cite:
+
+```bibtex
+@article{zhang2026fieldaware,
+  title={Field-Aware RankMixer with Dual-Stream Bilinear Fusion for the Tencent UNI-REC Challenge},
+  author={Zhang, Yufeng and Xu, Zhengqi and Cui, Jiajun},
+  journal={arXiv preprint arXiv:2607.15590},
+  year={2026}
+}
+```
 
 ## License
 
